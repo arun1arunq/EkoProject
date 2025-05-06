@@ -17,48 +17,36 @@ Project ini bertujuan untuk melakukan klasifikasi jenis serangan jaringan dengan
 Baris ini mengimpor library pandas, yang merupakan library utama untuk melakukan manipulasi dan analisis data berbasis tabel (DataFrame). Library ini digunakan untuk membaca file CSV dan melakukan operasi penggabungan data, seleksi kolom, dan lainnya.
 
 2. Mount Google Drive
-  ```python
-from google.colab import drive
-drive.mount('/content/drive')
+   ```python
+   from google.colab import drive
+   drive.mount('/content/drive')
 Kode ini digunakan ketika program dijalankan di Google Colab. Fungsinya adalah menghubungkan Google Colab dengan akun Google Drive, sehingga file yang berada di Drive bisa diakses langsung dari Colab. Setelah perintah ini dijalankan, pengguna akan diminta otorisasi untuk mengakses Drive-nya.
 
 4. Membaca Dataset CSV dari Google Drive
-python
-Copy
-Edit
-folder_path = '/content/drive/My Drive/Dataset/'
-
-file1 = pd.read_csv(folder_path + 'MITM ARP Spoofing.csv')
-file2 = pd.read_csv(folder_path + 'DoS ICMP Flood.csv')
-file3 = pd.read_csv(folder_path + 'MQTT DoS Publish Flood.csv')
+   ```python
+   folder_path = '/content/drive/My Drive/Dataset/'
+   file1 = pd.read_csv(folder_path + 'MITM ARP Spoofing.csv')
+   file2 = pd.read_csv(folder_path + 'DoS ICMP Flood.csv')
+   file3 = pd.read_csv(folder_path + 'MQTT DoS Publish Flood.csv')
 Di sini, tiga file CSV dibaca menggunakan fungsi pd.read_csv(). File-file ini berisi data dari tiga jenis serangan yang berbeda. Semua file berada dalam folder bernama Dataset yang terletak di direktori utama Google Drive pengguna.
 
 4. Menggabungkan Ketiga Dataset Menjadi Satu
-python
-Copy
-Edit
-DataConcatenation = pd.concat([file1, file2, file3], ignore_index=True)
+   ```python
+   DataConcatenation = pd.concat([file1, file2, file3], ignore_index=True)
 Data dari ketiga file CSV kemudian digabungkan menjadi satu kesatuan menggunakan fungsi pd.concat(). Opsi ignore_index=True digunakan agar indeks dari data baru direset ulang secara otomatis mulai dari nol.
 
 5. Memisahkan Kolom Fitur dan Target (Label)
-python
-Copy
-Edit
-x = DataConcatenation.iloc[:, 7:76]
-y = DataConcatenation.iloc[:, 83:84]
+   ```python
+   x = DataConcatenation.iloc[:, 7:76]
+   y = DataConcatenation.iloc[:, 83:84]
 x adalah variabel yang menyimpan fitur (feature) atau atribut yang akan digunakan sebagai input ke model machine learning. Di sini, fitur diambil dari kolom ke-7 hingga kolom ke-75.
-
 y adalah label (target output) dari dataset, yang berisi jenis serangan yang ingin diprediksi. Diambil dari kolom ke-83.
-
 Perlu dicatat bahwa penggunaan .iloc berdasarkan posisi indeks kolom. Pastikan kolom ke-83 memang merupakan label pada dataset Anda.
 
 6. Membagi Dataset Menjadi Data Latih dan Uji
-python
-Copy
-Edit
-from sklearn.model_selection import train_test_split
-
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+   ```python
+   from sklearn.model_selection import train_test_split
+   x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 Data yang telah dipisahkan kemudian dibagi lagi menjadi dua bagian, yaitu:
 
 Data training (pelatihan): digunakan untuk melatih model machine learning.
