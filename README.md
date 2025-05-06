@@ -14,7 +14,7 @@ Project ini bertujuan untuk melakukan klasifikasi jenis serangan jaringan (Dari 
 1. Import Library yang Dibutuhkan
    ```python
    import pandas as pd
-Baris ini mengimpor library pandas, yang merupakan library utama untuk melakukan manipulasi dan analisis data berbasis tabel (DataFrame). Library ini digunakan untuk membaca file CSV dan melakukan operasi penggabungan data, seleksi kolom, dan lainnya.
+Baris ini mengimpor library ```pandas```, yang merupakan library utama untuk melakukan manipulasi dan analisis data berbasis tabel (DataFrame). Library ini digunakan untuk membaca file CSV dan melakukan operasi penggabungan data, seleksi kolom, dan lainnya.
 
 2. Mount Google Drive
    ```python
@@ -22,25 +22,25 @@ Baris ini mengimpor library pandas, yang merupakan library utama untuk melakukan
    drive.mount('/content/drive')
 Kode ini digunakan ketika program dijalankan di Google Colab. Fungsinya adalah menghubungkan Google Colab dengan akun Google Drive, sehingga file yang berada di Drive saya bisa diakses langsung dari Colab. Setelah perintah ini dijalankan, pengguna akan diminta otorisasi untuk mengakses Drive-nya.
 
-4. Membaca Dataset CSV dari Google Drive
+3. Membaca Dataset CSV dari Google Drive
    ```python
    folder_path = '/content/drive/My Drive/Dataset/'
    file1 = pd.read_csv(folder_path + 'MITM ARP Spoofing.csv')
    file2 = pd.read_csv(folder_path + 'DoS ICMP Flood.csv')
    file3 = pd.read_csv(folder_path + 'MQTT DoS Publish Flood.csv')
-Di sini, tiga file CSV dibaca menggunakan fungsi pd.read_csv(). File-file ini berisi data dari tiga jenis serangan yang berbeda. Semua file berada dalam folder bernama Dataset yang terletak di direktori utama Google Drive pengguna.
+Di sini, tiga file CSV dibaca menggunakan fungsi ```pd.read_csv()```. File-file ini berisi data dari tiga jenis serangan yang berbeda. Semua file berada dalam folder bernama ```Dataset``` yang terletak di direktori utama Google Drive pengguna.
 
 4. Menggabungkan Ketiga Dataset Menjadi Satu
    ```python
    DataConcatenation = pd.concat([file1, file2, file3], ignore_index=True)
-Data dari ketiga file CSV kemudian digabungkan menjadi satu kesatuan menggunakan fungsi pd.concat(). Opsi ignore_index=True digunakan agar indeks dari data baru direset ulang secara otomatis mulai dari nol.
+Data dari ketiga file CSV kemudian digabungkan menjadi satu kesatuan menggunakan fungsi ```pd.concat()```. Opsi ```ignore_index=True``` digunakan agar indeks dari data baru direset ulang secara otomatis mulai dari nol.
 
 5. Memisahkan Kolom Fitur dan Target (Label)
    ```python
    x = DataConcatenation.iloc[:, 7:76]
    y = DataConcatenation.iloc[:, 83:84]
-- x adalah variabel yang menyimpan fitur (feature) atau atribut yang akan digunakan sebagai input ke model machine learning. Di sini, fitur diambil dari kolom ke-7 hingga kolom ke-75.
-- y adalah label (target output) dari dataset, yang berisi jenis serangan yang ingin diprediksi. Diambil dari kolom ke-83.
+- ```x``` adalah variabel yang menyimpan fitur (feature) atau atribut yang akan digunakan sebagai input ke model machine learning. Di sini, fitur diambil dari kolom ke-7 hingga kolom ke-75.
+- ```y``` adalah label (target output) dari dataset, yang berisi jenis serangan yang ingin diprediksi. Diambil dari kolom ke-83.
 
 
 6. Membagi Dataset Menjadi Data Latih dan Uji
@@ -52,7 +52,7 @@ Data yang telah dipisahkan kemudian dibagi lagi menjadi dua bagian, yaitu:
 - Data training (pelatihan): digunakan untuk melatih model machine learning.
 - Data testing (pengujian): digunakan untuk mengevaluasi performa model.
 
-Fungsi ```train_test_split``` dari sklearn digunakan untuk proses ini, dengan test_size=0.2 artinya 20% data digunakan sebagai data uji, dan random_state=42 untuk memastikan hasil pembagian tetap konsisten.
+Fungsi ```train_test_split``` dari ```sklearn``` digunakan untuk proses ini, dengan ```test_size=0.2``` artinya 20% data digunakan sebagai data uji, dan ```random_state=42``` untuk memastikan hasil pembagian tetap konsisten.
 
 7. Membuat dan Melatih Model Decision Tree
    ```python
@@ -61,7 +61,7 @@ Fungsi ```train_test_split``` dari sklearn digunakan untuk proses ini, dengan te
    q = DecisionTreeClassifier()
    q.fit(x_train, y_train)
    y_pred = q.predict(x_test)
-Kode ini membuat model klasifikasi dengan algoritma Decision Tree. Model ini dilatih menggunakan data training (x_train, y_train) dan kemudian digunakan untuk memprediksi data testing (x_test) yang hasilnya disimpan dalam y_pred.
+Kode ini membuat model klasifikasi dengan algoritma Decision Tree. Model ini dilatih menggunakan data training (```x_train```, ```y_train```) dan kemudian digunakan untuk memprediksi data testing (```x_test```) yang hasilnya disimpan dalam ```y_pred```.
 
 8. Menghitung dan Menampilkan Akurasi Model
    ```python
@@ -70,7 +70,7 @@ Kode ini membuat model klasifikasi dengan algoritma Decision Tree. Model ini dil
    accuracy = accuracy_score(y_test, y_pred)
    accuracy_percent = round(accuracy * 100, 2)
    print(f"Akurasi: {accuracy_percent}%")
-Akurasi dihitung menggunakan accuracy_score, yang membandingkan hasil prediksi dengan data sebenarnya. Nilai akurasi kemudian diubah menjadi persentase dan ditampilkan di konsol.
+Akurasi dihitung menggunakan ```accuracy_score```, yang membandingkan hasil prediksi dengan data sebenarnya. Nilai akurasi kemudian diubah menjadi persentase dan ditampilkan di konsol.
 
 9. Visualisasi Pohon Keputusan
    ```python
@@ -81,7 +81,7 @@ Akurasi dihitung menggunakan accuracy_score, yang membandingkan hasil prediksi d
    fig = plt.figure(figsize=(10, 7))
    tree.plot_tree(q, feature_names=x.columns.values, class_names=np.array(['MITM ARP Spoofing', 'DoS ICMP Flood', 'MQTT DoS Publish Flood']), filled=True)
    plt.show()
-Pohon keputusan yang terbentuk divisualisasikan menggunakan fungsi plot_tree dari library sklearn.tree. Ini membantu pengguna memahami bagaimana model memutuskan sebuah prediksi berdasarkan fitur yang tersedia.
+Pohon keputusan yang terbentuk divisualisasikan menggunakan fungsi ```plot_tree``` dari library ```sklearn.tree```. Ini membantu pengguna memahami bagaimana model memutuskan sebuah prediksi berdasarkan fitur yang tersedia.
 
 10. Membuat Confusion Matrix dan Visualisasi Heatmap
     ```python
@@ -97,4 +97,4 @@ Pohon keputusan yang terbentuk divisualisasikan menggunakan fungsi plot_tree dar
     plt.ylabel('Fakta')
     plt.title('Confusion Matrix')
     plt.show()
-Confusion Matrix digunakan untuk mengevaluasi performa klasifikasi dengan melihat jumlah prediksi benar dan salah dari masing-masing kelas. Heatmap yang dibuat dari seaborn memberikan tampilan visual yang mudah dipahami.
+Confusion Matrix digunakan untuk mengevaluasi performa klasifikasi dengan melihat jumlah prediksi benar dan salah dari masing-masing kelas. Heatmap yang dibuat dari ```seaborn``` memberikan tampilan visual yang mudah dipahami.
