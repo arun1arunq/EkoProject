@@ -12,14 +12,12 @@ Penjelasan Lengkap Kode Program Python
 Project ini bertujuan untuk melakukan klasifikasi jenis serangan jaringan dengan menggunakan algoritma Decision Tree Classifier pada data yang diperoleh dalam bentuk file CSV dari Google Drive. Dataset yang digunakan berisi data serangan seperti MITM ARP Spoofing, DoS ICMP Flood, dan MQTT DoS Publish Flood. Berikut adalah penjelasan mendalam dari masing-masing bagian kode:
 
 1. Import Library yang Dibutuhkan
-   ```python 
-import pandas as pd
+   ```python
+   import pandas as pd
 Baris ini mengimpor library pandas, yang merupakan library utama untuk melakukan manipulasi dan analisis data berbasis tabel (DataFrame). Library ini digunakan untuk membaca file CSV dan melakukan operasi penggabungan data, seleksi kolom, dan lainnya.
 
-3. Mount Google Drive
-python
-Copy
-Edit
+2. Mount Google Drive
+  ```python
 from google.colab import drive
 drive.mount('/content/drive')
 Kode ini digunakan ketika program dijalankan di Google Colab. Fungsinya adalah menghubungkan Google Colab dengan akun Google Drive, sehingga file yang berada di Drive bisa diakses langsung dari Colab. Setelah perintah ini dijalankan, pengguna akan diminta otorisasi untuk mengakses Drive-nya.
