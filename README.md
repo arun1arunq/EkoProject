@@ -39,8 +39,8 @@ Data dari ketiga file CSV kemudian digabungkan menjadi satu kesatuan menggunakan
    ```python
    x = DataConcatenation.iloc[:, 7:76]
    y = DataConcatenation.iloc[:, 83:84]
-x adalah variabel yang menyimpan fitur (feature) atau atribut yang akan digunakan sebagai input ke model machine learning. Di sini, fitur diambil dari kolom ke-7 hingga kolom ke-75.
-y adalah label (target output) dari dataset, yang berisi jenis serangan yang ingin diprediksi. Diambil dari kolom ke-83.
+- x adalah variabel yang menyimpan fitur (feature) atau atribut yang akan digunakan sebagai input ke model machine learning. Di sini, fitur diambil dari kolom ke-7 hingga kolom ke-75.
+- y adalah label (target output) dari dataset, yang berisi jenis serangan yang ingin diprediksi. Diambil dari kolom ke-83.
 Perlu dicatat bahwa penggunaan .iloc berdasarkan posisi indeks kolom. Pastikan kolom ke-83 memang merupakan label pada dataset Anda.
 
 6. Membagi Dataset Menjadi Data Latih dan Uji
