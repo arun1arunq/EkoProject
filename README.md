@@ -56,54 +56,46 @@ Data testing (pengujian): digunakan untuk mengevaluasi performa model.
 Fungsi train_test_split dari sklearn digunakan untuk proses ini, dengan test_size=0.2 artinya 20% data digunakan sebagai data uji, dan random_state=42 untuk memastikan hasil pembagian tetap konsisten.
 
 7. Membuat dan Melatih Model Decision Tree
-python
-Copy
-Edit
-from sklearn.tree import DecisionTreeClassifier
+   ```python
+   from sklearn.tree import DecisionTreeClassifier
 
-q = DecisionTreeClassifier()
-q.fit(x_train, y_train)
-y_pred = q.predict(x_test)
+   q = DecisionTreeClassifier()
+   q.fit(x_train, y_train)
+   y_pred = q.predict(x_test)
 Kode ini membuat model klasifikasi dengan algoritma Decision Tree. Model ini dilatih menggunakan data training (x_train, y_train) dan kemudian digunakan untuk memprediksi data testing (x_test) yang hasilnya disimpan dalam y_pred.
 
 8. Menghitung dan Menampilkan Akurasi Model
-python
-Copy
-Edit
-from sklearn.metrics import accuracy_score
+   ```python
+   from sklearn.metrics import accuracy_score
 
-accuracy = accuracy_score(y_test, y_pred)
-accuracy_percent = round(accuracy * 100, 2)
-print(f"Akurasi: {accuracy_percent}%")
+   accuracy = accuracy_score(y_test, y_pred)
+   accuracy_percent = round(accuracy * 100, 2)
+   print(f"Akurasi: {accuracy_percent}%")
 Akurasi dihitung menggunakan accuracy_score, yang membandingkan hasil prediksi dengan data sebenarnya. Nilai akurasi kemudian diubah menjadi persentase dan ditampilkan di konsol.
 
 9. Visualisasi Pohon Keputusan
-python
-Copy
-Edit
-import matplotlib.pyplot as plt
-from sklearn import tree
-import numpy as np
+   ```python
+   import matplotlib.pyplot as plt
+   from sklearn import tree
+   import numpy as np
 
-fig = plt.figure(figsize=(10, 7))
-tree.plot_tree(q, feature_names=x.columns.values, class_names=np.array(['MITM ARP Spoofing', 'DoS ICMP Flood', 'MQTT DoS Publish Flood']), filled=True)
-plt.show()
+   fig = plt.figure(figsize=(10, 7))
+   tree.plot_tree(q, feature_names=x.columns.values, class_names=np.array(['MITM ARP Spoofing', 'DoS ICMP Flood', 'MQTT DoS Publish Flood']), filled=True)
+   plt.show()
 Pohon keputusan yang terbentuk divisualisasikan menggunakan fungsi plot_tree dari library sklearn.tree. Ini membantu pengguna memahami bagaimana model memutuskan sebuah prediksi berdasarkan fitur yang tersedia.
 
 10. Membuat Confusion Matrix dan Visualisasi Heatmap
-python
-Copy
-Edit
-import seaborn as sns
-from sklearn import metrics
+    ```python
+    import seaborn as sns
+    from sklearn import metrics
 
-label = np.array(['MITM ARP Spoofing', 'DoS ICMP Flood', 'MQTT DoS Publish Flood'])
-conf_matrix = metrics.confusion_matrix(y_test, y_pred)
+    label = np.array(['MITM ARP Spoofing', 'DoS ICMP Flood', 'MQTT DoS Publish Flood'])
+    conf_matrix = metrics.confusion_matrix(y_test, y_pred)
 
-plt.figure(figsize=(10, 10))
-sns.heatmap(conf_matrix, annot=True, xticklabels=label, yticklabels=label, cmap='Blues')
-plt.xlabel('Prediksi')
-plt.ylabel('Fakta')
-plt.title('Confusion Matrix')
-plt.show()
+    plt.figure(figsize=(10, 10))
+    sns.heatmap(conf_matrix, annot=True, xticklabels=label, yticklabels=label, cmap='Blues')
+    plt.xlabel('Prediksi')
+    plt.ylabel('Fakta')
+    plt.title('Confusion Matrix')
+    plt.show()
 Confusion Matrix digunakan untuk mengevaluasi performa klasifikasi dengan melihat jumlah prediksi benar dan salah dari masing-masing kelas. Heatmap yang dibuat dari seaborn memberikan tampilan visual yang mudah dipahami.
