@@ -41,19 +41,18 @@ Data dari ketiga file CSV kemudian digabungkan menjadi satu kesatuan menggunakan
    y = DataConcatenation.iloc[:, 83:84]
 - x adalah variabel yang menyimpan fitur (feature) atau atribut yang akan digunakan sebagai input ke model machine learning. Di sini, fitur diambil dari kolom ke-7 hingga kolom ke-75.
 - y adalah label (target output) dari dataset, yang berisi jenis serangan yang ingin diprediksi. Diambil dari kolom ke-83.
-Perlu dicatat bahwa penggunaan .iloc berdasarkan posisi indeks kolom. Pastikan kolom ke-83 memang merupakan label pada dataset Anda.
+
 
 6. Membagi Dataset Menjadi Data Latih dan Uji
    ```python
    from sklearn.model_selection import train_test_split
    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+   
 Data yang telah dipisahkan kemudian dibagi lagi menjadi dua bagian, yaitu:
+- Data training (pelatihan): digunakan untuk melatih model machine learning.
+- Data testing (pengujian): digunakan untuk mengevaluasi performa model.
 
-Data training (pelatihan): digunakan untuk melatih model machine learning.
-
-Data testing (pengujian): digunakan untuk mengevaluasi performa model.
-
-Fungsi train_test_split dari sklearn digunakan untuk proses ini, dengan test_size=0.2 artinya 20% data digunakan sebagai data uji, dan random_state=42 untuk memastikan hasil pembagian tetap konsisten.
+Fungsi ```train_test_split``` dari sklearn digunakan untuk proses ini, dengan test_size=0.2 artinya 20% data digunakan sebagai data uji, dan random_state=42 untuk memastikan hasil pembagian tetap konsisten.
 
 7. Membuat dan Melatih Model Decision Tree
    ```python
